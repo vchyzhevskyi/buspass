@@ -1,4 +1,5 @@
-﻿using NHibernate.Criterion;
+﻿using System.Collections.Generic;
+using NHibernate.Criterion;
 using Yuliya.DAL;
 using Yuliya.DAL.Domain;
 
@@ -40,6 +41,15 @@ namespace Yuliya.BL
             {
                 dbSession.Delete(entity);
                 dbSession.Flush();
+            }
+        }
+
+        public IEnumerable<TicketType> ReadList()
+        {
+            using (var dbSession = NSessionFactory.Instance.Create())
+            {
+                var criteria = dbSession.CreateCriteria<TicketType>();
+                return criteria.List<TicketType>();
             }
         }
     }

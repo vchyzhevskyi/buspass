@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using NHibernate.Criterion;
 using Yuliya.DAL;
 using Yuliya.DAL.Domain;
@@ -56,6 +57,16 @@ namespace Yuliya.BL
                 var criteria = dbSession.CreateCriteria<User>();
                 criteria.Add(Restrictions.Eq("Token", token));
                 return criteria.UniqueResult<User>();
+            }
+        }
+
+        public bool IsTokenValid(Guid token)
+        {
+            using (var dbSession = NSessionFactory.Instance.Create())
+            {
+                var criteria = dbSession.CreateCriteria<User>();
+                criteria.Add(Restrictions.Eq("Token", token));
+                return criteria.List<User>().Any();
             }
         }
     }

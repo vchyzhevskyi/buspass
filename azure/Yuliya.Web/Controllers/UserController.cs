@@ -10,6 +10,7 @@ namespace Yuliya.Web.Controllers
 {
     public class UserController : ApiController
     {
+        private const string AuthHeaderName = "X-APP-Auth";
         private readonly IUserRepository _repo;
 
         public UserController()
@@ -44,6 +45,7 @@ namespace Yuliya.Web.Controllers
 
             if (hashedFromUser.Equals(user.Password))
             {
+                HttpContext.Current.Response.Headers.Add(AuthHeaderName, user.Token.ToString());
                 return user;
             }
 

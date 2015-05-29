@@ -7,5 +7,6 @@ namespace Yuliya.BL
     {
         User ReadByLogin(string login);
         User ReadByToken(Guid token);
+        bool IsTokenValid(Guid token);
     }
 }

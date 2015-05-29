@@ -316,7 +316,7 @@ intellisense.annotate(jQuery, {
   'parseJSON': function() {
     /// <signature>
     ///   <summary>Takes a well-formed JSON string and returns the resulting JavaScript object.</summary>
-    ///   <param name="json" type="String">The JSON string to parse.</param>
+    ///   <param name="json" type="String">The JSON string to token.</param>
     ///   <returns type="Object" />
     /// </signature>
   },
