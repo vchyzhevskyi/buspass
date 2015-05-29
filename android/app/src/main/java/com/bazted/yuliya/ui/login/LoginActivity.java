@@ -29,6 +29,7 @@ import com.bazted.yuliya.R;
 import com.bazted.yuliya.app.BaseActivity;
 import com.bazted.yuliya.app.YApp;
 import com.bazted.yuliya.ui.MainActivity_;
+import com.bazted.yuliya.ui.register.RegisterActivity_;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.App;
@@ -120,7 +121,11 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (TextUtils.isEmpty(password)) {
+            mPasswordView.setError(getString(R.string.error_invalid_password));
+            focusView = mPasswordView;
+            cancel = true;
+        } else if (!isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -154,7 +159,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         //TODO make request
         if (login.equals(LOGIN) && pass.equals(PASS)) {
             startMainActivity();
-            app.auth().login(login, LOGIN + PASS);
+            app.auth().login(login, login + pass);
         } else {
             showProgress(false);
         }
@@ -162,7 +167,9 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
 
     @UiThread
     void startMainActivity() {
-        MainActivity_.intent(this).start();
+        MainActivity_.intent(this)
+                .start();
+        finish();
     }
 
     private boolean isEmailValid(String email) {
@@ -237,6 +244,13 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         }
 
         addEmailsToAutoComplete(emails);
+    }
+
+    @Click(R.id.register_btn)
+    void registerClicked() {
+        RegisterActivity_.intent(this)
+                .emailFromLogin(mEmailView.getText().toString())
+                .start();
     }
 
     @Override
