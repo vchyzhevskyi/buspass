@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net452": {
+      "bin": {
+        "assembly": "../../../packages/FluentNHibernate.2.0.1.0/lib/net40/FluentNHibernate.dll",
+        "pdb": "../../../packages/FluentNHibernate.2.0.1.0/lib/net40/FluentNHibernate.pdb"
+      }
+    },
+    "net45": {
+      "bin": {
+        "assembly": "../../../packages/FluentNHibernate.2.0.1.0/lib/net40/FluentNHibernate.dll",
+        "pdb": "../../../packages/FluentNHibernate.2.0.1.0/lib/net40/FluentNHibernate.pdb"
+      }
+    }
+  }
+}

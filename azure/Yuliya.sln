@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yuliya.DAL", "Yuliya.DAL\Yu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yuliya.BL", "Yuliya.BL\Yuliya.BL.csproj", "{A0332D8F-DD65-462B-BF3B-19DFC09DB3DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yuliya.Web", "Yuliya.Web\Yuliya.Web.csproj", "{AB343C9A-859C-4B91-9FE7-BE9436373305}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{A0332D8F-DD65-462B-BF3B-19DFC09DB3DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0332D8F-DD65-462B-BF3B-19DFC09DB3DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0332D8F-DD65-462B-BF3B-19DFC09DB3DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB343C9A-859C-4B91-9FE7-BE9436373305}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB343C9A-859C-4B91-9FE7-BE9436373305}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB343C9A-859C-4B91-9FE7-BE9436373305}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB343C9A-859C-4B91-9FE7-BE9436373305}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

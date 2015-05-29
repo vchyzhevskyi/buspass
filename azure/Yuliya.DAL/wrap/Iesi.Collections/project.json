@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net452": {
+      "bin": {
+        "assembly": "../../../packages/Iesi.Collections.4.0.0.4000/lib/net40/Iesi.Collections.dll"
+      }
+    },
+    "net45": {
+      "bin": {
+        "assembly": "../../../packages/Iesi.Collections.4.0.0.4000/lib/net40/Iesi.Collections.dll"
+      }
+    }
+  }
+}
