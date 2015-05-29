@@ -27,7 +27,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.MainActivity_" />
-        <activity android:name=".ui.register.RegisterActivity_" />
+        <activity
+            android:name=".ui.register.RegisterActivity_"
+            android:label="@string/register_btn" />
     </application>
 
 </manifest>
