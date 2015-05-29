@@ -49,6 +49,7 @@ namespace Yuliya.BL
                 var criteria = dbSession.CreateCriteria<Ticket>();
                 criteria.CreateAlias("User", "user");
                 criteria.Add(Restrictions.Eq("user.Token", userToken));
+                criteria.AddOrder(Order.Desc("Bought"));
                 return criteria.List<Ticket>();
             }
         }

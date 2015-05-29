@@ -97,18 +97,26 @@ namespace Yuliya.Tests.Unit
             CollectionAssert.IsNotEmpty(tickets);
             var ticket = tickets.First();
             Assert.IsNotNull(ticket);
-            Assert.That(_ticketBought, Is.EqualTo(ticket.Bought).Within(1).Minutes);
+            Assert.That(_ticketBought1, Is.EqualTo(ticket.Bought).Within(1).Minutes);
             Assert.AreEqual(_userToken, ticket.User.Token);
 
             ticket = tickets.Skip(1).First();
             Assert.IsNotNull(ticket);
-            Assert.That(_ticketBought1, Is.EqualTo(ticket.Bought).Within(1).Minutes);
+            Assert.That(_ticketBought, Is.EqualTo(ticket.Bought).Within(1).Minutes);
             Assert.AreEqual(_userToken, ticket.User.Token);
         }
 
         [TestFixtureTearDown]
         public void down()
         {
+            var tickets = _tRepo.ReadActiveTickets(_userToken);
+            foreach (var ticket in tickets)
+            {
+                _tRepo.Delete(ticket);
+            }
+            _userRepo.Delete(_user);
+            _ttRepo.Delete(_tt);
+
             IContainer.Instance.Dispose();
         }
     }
