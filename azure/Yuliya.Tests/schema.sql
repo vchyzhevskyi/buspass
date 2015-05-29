@@ -30,9 +30,9 @@ alter table dbo.Ticket  drop constraint FKE14EC5364E8AD196
 
     create table dbo.[User] (
         Id INT IDENTITY NOT NULL,
-       Login NVARCHAR(255) not null,
+       Login NVARCHAR(255) not null unique,
        Password VARBINARY(MAX) not null,
-       Token VARBINARY(MAX) not null,
+       Token UNIQUEIDENTIFIER not null,
        primary key (Id)
     )
 
