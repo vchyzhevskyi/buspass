@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2015. V. Chyzhevskyi & T.Bazyshyn
   -->
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bazted.yuliya">
 
@@ -26,6 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.MainActivity_" />
+        <activity android:name=".ui.register.RegisterActivity_" />
     </application>
 
 </manifest>
