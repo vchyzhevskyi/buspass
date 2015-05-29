@@ -13,6 +13,11 @@ namespace Yuliya.BL
                     .For<IUserRepository>()
                     .ImplementedBy<NUserRepository>()
                     .LifeStyle.Singleton);
+            container.Register(
+                Component
+                    .For<ITicketTypeRepository>()
+                    .ImplementedBy<NTicketTypeRepository>()
+                    .LifeStyle.Singleton);
         }
     }
 }

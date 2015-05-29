@@ -22,7 +22,7 @@ alter table dbo.Ticket  drop constraint FKE14EC5364E8AD196
     )
 
     create table dbo.TicketType (
-        Id INT IDENTITY NOT NULL,
+        Id INT not null,
        Name NVARCHAR(255) not null,
        Cost DECIMAL(19,5) not null,
        primary key (Id)

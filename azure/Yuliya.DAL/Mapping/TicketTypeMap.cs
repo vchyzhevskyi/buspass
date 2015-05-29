@@ -9,7 +9,7 @@ namespace Yuliya.DAL.Mapping
         {
             Schema("dbo");
             Table("TicketType");
-            Id(_ => _.Id).Column("Id").GeneratedBy.Identity();
+            Id(_ => _.Id).Column("Id").GeneratedBy.Increment();
             Map(_ => _.Name).Column("Name").Not.Nullable();
             Map(_ => _.Cost).Column("Cost").Not.Nullable();
         }

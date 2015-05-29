@@ -59,8 +59,10 @@
     <Compile Include="DependencyConfiguration.cs" />
     <Compile Include="IContainer.cs" />
     <Compile Include="ICRUD.cs" />
+    <Compile Include="ITicketTypeRepository.cs" />
     <Compile Include="IUserRepository.cs" />
     <Compile Include="MD5Hasher.cs" />
+    <Compile Include="NTicketTypeRepository.cs" />
     <Compile Include="NUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
