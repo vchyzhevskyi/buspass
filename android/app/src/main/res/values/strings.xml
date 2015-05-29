@@ -1,0 +1,11 @@
+<!--
+  ~ Copyright (c) 2015. V. Chyzhevskyi & T.Bazyshyn
+  -->
+
+<resources>
+    <string name="app_name">Yuliya</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+</resources>

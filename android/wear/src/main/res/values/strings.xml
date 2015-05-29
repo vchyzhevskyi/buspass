@@ -1,0 +1,11 @@
+<!--
+  ~ Copyright (c) 2015. V. Chyzhevskyi & T.Bazyshyn
+  -->
+
+<resources>
+    <string name="app_name">Yuliya</string>
+
+    <string name="hello">Hello World!</string>
+    <string name="title">Hello Notification!</string>
+    <string name="notification_posted">Notification posted</string>
+</resources>
