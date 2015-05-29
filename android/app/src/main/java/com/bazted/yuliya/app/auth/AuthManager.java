@@ -6,6 +6,8 @@ package com.bazted.yuliya.app.auth;
 
 import android.text.TextUtils;
 
+import com.bazted.yuliya.app.security.Sha1;
+
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.androidannotations.api.sharedpreferences.StringPrefField;
@@ -42,6 +44,22 @@ public class AuthManager {
         return emailField().get();
     }
 
+    private StringPrefField pinHashField() {
+        return authPref.pinHash();
+    }
+
+    private String pin() {
+        return pinHashField().get();
+    }
+
+    public void setPin(String pin) {
+        pinHashField().put(Sha1.getHash(pin));
+    }
+
+    public boolean matchPin(String pin) {
+        return pin().equals(Sha1.getHash(pin));
+    }
+
     public void login(String email, String token) {
         if (TextUtils.isEmpty(email)) {
             throw new IllegalStateException("email should not be empty");
@@ -57,6 +75,7 @@ public class AuthManager {
     public void logout() {
         emailField().put(null);
         tokenField().put(null);
+        pinHashField().put(null);
     }
 
 }
