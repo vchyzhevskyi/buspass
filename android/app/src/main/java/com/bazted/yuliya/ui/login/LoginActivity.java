@@ -74,6 +74,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
 
     @AfterViews
     void start() {
+        setTitle(R.string.action_sign_in_short);
         if (app.auth().isLogged()) {
             startMainActivity();
             return;
