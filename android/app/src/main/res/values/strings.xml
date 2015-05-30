@@ -30,4 +30,5 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="register_btn">Register</string>
+    <string name="use_nfc_to_buy_ticket">Use NFC to buy ticket</string>
 </resources>
