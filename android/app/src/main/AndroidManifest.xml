@@ -33,15 +33,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.MainActivity_">
-            <intent-filter>
-                <action android:name="android.nfc.action.TAG_DISCOVERED" />
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:mimeType="application/com.bazted.yuliya" />
-                <data android:mimeType="application/json" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.MainActivity_" />
 
         <activity
             android:name=".ui.register.RegisterActivity_"
