@@ -51,6 +51,9 @@ dependencies {
     apt "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"
 
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.squareup.okhttp:okhttp:2.4.0'
+
     wearApp project(':wear')
     compile "com.google.android.gms:play-services:$project.PlayServicesVersion"
 }
