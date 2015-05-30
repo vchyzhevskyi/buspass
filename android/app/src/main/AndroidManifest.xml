@@ -46,6 +46,11 @@
             android:name=".ui.pin.PinActivity_"
             android:label="@string/pin"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.NotificationActivity_"
+            android:excludeFromRecents="true"
+            android:taskAffinity="" />
     </application>
 
 </manifest>
