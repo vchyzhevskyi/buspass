@@ -9,6 +9,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.View;
@@ -23,6 +24,8 @@ import com.bazted.yuliya.BuildConfig;
 import com.bazted.yuliya.R;
 import com.bazted.yuliya.app.BaseActivity;
 import com.bazted.yuliya.app.YApp;
+import com.bazted.yuliya.rest.RestBean;
+import com.bazted.yuliya.rest.request.RegisterReq;
 import com.bazted.yuliya.ui.login.LoginActivity;
 import com.bazted.yuliya.ui.pin.PinActivity_;
 
@@ -34,6 +37,9 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by T.Bazyshyn on 29/05/15.
@@ -150,16 +156,26 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 
-    @Background(delay = 3500)
+    @Background
     void startRegistrationRequest(String login, String pass) {
-        //TODO make request
-        if (login.equals(LoginActivity.LOGIN) && pass.equals(LoginActivity.PASS)) {
-            app.auth().login(login, login + pass);
-            startPinConfiguration();
-        } else {
-            showProgress(false);
+        try {
+            Response response = app.api().register(new RegisterReq(login, pass));
+            if (response != null) {
+                Log.d("REGISTER", response.getStatus() + "");
+                String tokenFromHeaders = RestBean.getTokenFromHeaders(response);
+                if (!TextUtils.isEmpty(tokenFromHeaders)) {
+                    app.auth().login(login, tokenFromHeaders);
+                    startPinConfiguration();
+                    return;
+                } else {
+                    showToast("Registration error");
+                }
+            }
+        } catch (RetrofitError e) {
+            Log.e("REGISTER", e.toString());
+            showToast("Registration error");
         }
-
+        showProgress(false);
     }
 
     @UiThread

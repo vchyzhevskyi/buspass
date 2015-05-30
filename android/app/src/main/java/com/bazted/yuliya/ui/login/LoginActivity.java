@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.View;
@@ -28,6 +29,7 @@ import android.widget.TextView;
 import com.bazted.yuliya.R;
 import com.bazted.yuliya.app.BaseActivity;
 import com.bazted.yuliya.app.YApp;
+import com.bazted.yuliya.rest.RestBean;
 import com.bazted.yuliya.ui.MainActivity_;
 import com.bazted.yuliya.ui.pin.PinActivity_;
 import com.bazted.yuliya.ui.register.RegisterActivity_;
@@ -42,6 +44,9 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * A login screen that offers login via email/password.
@@ -156,15 +161,26 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         }
     }
 
-    @Background(delay = 3500)
+    @Background
     void startLoginRequest(String login, String pass) {
-        //TODO make request
-        if (login.equals(LOGIN) && pass.equals(PASS)) {
-            app.auth().login(login, login + pass);
-            startPinConfiguration();
-        } else {
-            showProgress(false);
+        try {
+            Response response = app.api().login(login, pass);
+            if (response != null) {
+                Log.d("LOGIN", response.getStatus() + "");
+                String tokenFromHeaders = RestBean.getTokenFromHeaders(response);
+                if (!TextUtils.isEmpty(tokenFromHeaders)) {
+                    app.auth().login(login, tokenFromHeaders);
+                    startPinConfiguration();
+                    return;
+                } else {
+                    showToast("Login error");
+                }
+            }
+        } catch (RetrofitError e) {
+            Log.e("LOGIN", e.toString());
+            showToast("Login error");
         }
+        showProgress(false);
     }
 
     @UiThread

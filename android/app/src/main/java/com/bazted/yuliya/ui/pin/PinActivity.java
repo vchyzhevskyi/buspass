@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bazted.yuliya.R;
 import com.bazted.yuliya.app.BaseActivity;
@@ -115,11 +114,6 @@ public class PinActivity extends BaseActivity {
         MainActivity_.intent(this)
                 .start();
         finish();
-    }
-
-    @UiThread
-    void showToast(String text) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
     @UiThread
