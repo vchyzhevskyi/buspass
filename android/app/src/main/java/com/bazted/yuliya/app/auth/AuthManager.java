@@ -50,7 +50,11 @@ public class AuthManager {
     }
 
     public int favTicketId() {
-        return favTicketField().get();
+        return favTicketField().getOr(-1);
+    }
+
+    public boolean hasFavouriteTicket() {
+        return favTicketId() != -1;
     }
 
     private StringPrefField pinHashField() {
