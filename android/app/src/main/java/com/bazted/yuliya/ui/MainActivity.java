@@ -12,6 +12,8 @@ import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.widget.ListView;
@@ -29,6 +31,7 @@ import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.UiThread;
@@ -147,6 +150,12 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    @ItemClick(R.id.ticket_lv)
+    void ticketClicked(TicketTypeRes ticketTypeRes) {
+        app.auth().setFavTicket(ticketTypeRes.getId());
+        adapter.notifyDataSetChanged();
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -193,11 +202,45 @@ public class MainActivity extends BaseActivity {
                 BusNfc busNfc = app.getRestBean().converter().fromJson(jsonBody, BusNfc.class);
                 if (busNfc != null) {
                     Log.e(LOG, busNfc.toString());
+                    informAboutCatchingNfc(busNfc.getBusId());
                 }
+            } else {
+                showToast("Sorry TAG is not readable retry");
             }
         } else {
             showToast("Sorry TAG is not readable retry");
         }
+    }
+
+    private void informAboutCatchingNfc(int busId) {
+        int notificationId = 1001;
+// Build intent for notification content
+        notificationId += busId;
+
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
+        notificationBuilder.setSmallIcon(R.drawable.ic_directions_bus_white_48dp)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setAutoCancel(true)
+                .setContentTitle("Bus #" + busId);
+        if (app.auth().hasFavouriteTicket()) {
+            notificationBuilder
+                    .setContentText(" " + busId)
+                    .addAction(R.drawable.ic_done_white_24dp,
+                            "Buy", NotificationActivity.getDismissIntent(notificationId, this));
+        } else {
+            notificationBuilder
+                    .setContentText("You are buying ticket for a first time. Choose one that suits you. " +
+                            "Attention, we will remember it as default.")
+                    .addAction(R.drawable.ic_credit_card_white_48dp,
+                            "Choose type",
+                            NotificationActivity.getChangeTicketIntent(notificationId, this));
+        }
+        // Get an instance of the NotificationManager service
+        NotificationManagerCompat notificationManager =
+                NotificationManagerCompat.from(this);
+
+// Build the notification and issues it with notification manager.
+        notificationManager.notify(notificationId, notificationBuilder.build());
     }
 
 }
