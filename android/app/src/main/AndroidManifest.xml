@@ -5,12 +5,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bazted.yuliya">
 
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="true" />
+
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.NFC" />
 
     <application
         android:name=".app.YApp_"
@@ -21,13 +26,23 @@
         <activity
             android:name=".ui.login.LoginActivity_"
             android:windowSoftInputMode="adjustResize|stateVisible">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.MainActivity_" />
+        <activity android:name=".ui.MainActivity_">
+            <intent-filter>
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="application/com.bazted.yuliya" />
+                <data android:mimeType="application/json" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".ui.register.RegisterActivity_"
             android:label="@string/register_btn" />
