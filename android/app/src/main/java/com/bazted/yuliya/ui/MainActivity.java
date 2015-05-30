@@ -68,6 +68,7 @@ public class MainActivity extends BaseActivity {
                 downloadTickets();
             }
         });
+        ticketList.addHeaderView(NfcHeader_.build(this), null, false);
         ticketList.setAdapter(adapter);
         if (adapter.getCount() == 0) {
             downloadTickets();
