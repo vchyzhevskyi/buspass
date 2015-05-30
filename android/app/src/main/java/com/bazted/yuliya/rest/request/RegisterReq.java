@@ -19,6 +19,11 @@ public class RegisterReq {
     private String Login;
     private String Password;
 
+    public RegisterReq(String login, String password) {
+        Login = login;
+        Password = password;
+    }
+
     public void setLogin(String Login) {
         this.Login = Login;
     }
