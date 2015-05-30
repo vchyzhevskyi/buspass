@@ -25,7 +25,7 @@ public class AuthManager {
     AuthPref_ authPref;
 
     public boolean isLogged() {
-        return !TextUtils.isEmpty(token());
+        return !TextUtils.isEmpty(token()) && !TextUtils.isEmpty(pin());
     }
 
     private StringPrefField tokenField() {

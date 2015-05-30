@@ -53,7 +53,7 @@ public class PinActivity extends BaseActivity {
         return false;
     }
 
-    @Background(delay = 3500)
+    @Background
     void checkOrSavePin() {
         String textFromInput = editText.getText().toString();
         if (TextUtils.isEmpty(textFromInput) || textFromInput.length() < 4) {
@@ -77,6 +77,7 @@ public class PinActivity extends BaseActivity {
                 startMainActivity();
             } else {
                 showToast(getString(R.string.error_invalid_confirm_pin));
+                previousText = null;
                 askForPin();
             }
         }

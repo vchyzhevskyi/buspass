@@ -28,6 +28,7 @@
         android:imeOptions="actionDone"
         android:inputType="numberPassword"
         android:maxEms="4"
+        android:maxLength="4"
         android:minEms="4"
         android:singleLine="true" />
 
