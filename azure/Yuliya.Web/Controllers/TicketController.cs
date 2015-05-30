@@ -45,7 +45,10 @@ namespace Yuliya.Web.Controllers
                 && Guid.TryParse(authHeader, out token)
                 && _userRepo.IsTokenValid(token))
             {
+                value.Bought = DateTime.UtcNow;
+                value.User = _userRepo.ReadByToken(token);
                 _repo.Create(value);
+                return;
             }
 
             throw new HttpException((int) HttpStatusCode.Forbidden, string.Empty);

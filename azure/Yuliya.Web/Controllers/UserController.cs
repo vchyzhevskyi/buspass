@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using Yuliya.BL;
 using Yuliya.DAL.Domain;
+using Yuliya.Web.Models;
 
 namespace Yuliya.Web.Controllers
 {
@@ -43,7 +45,7 @@ namespace Yuliya.Web.Controllers
 
             var hashedFromUser = MD5Hasher.Hash(password);
 
-            if (hashedFromUser.Equals(user.Password))
+            if (hashedFromUser.SequenceEqual(user.Password))
             {
                 HttpContext.Current.Response.Headers.Add(AuthHeaderName, user.Token.ToString());
                 return user;
@@ -53,11 +55,18 @@ namespace Yuliya.Web.Controllers
             return new HttpStatusCodeResult((int) HttpStatusCode.BadRequest);
         }
 
-        public void Post([FromBody] User value)
+        public void Post([FromBody] UserRegistrationModel value)
         {
             try
             {
-                _repo.Create(value);
+                var user = new User
+                {
+                    Login = value.Login,
+                    Password = MD5Hasher.Hash(value.Password),
+                    Token = Guid.NewGuid()
+                };
+                _repo.Create(user);
+                HttpContext.Current.Response.Headers.Add(AuthHeaderName, user.Token.ToString());
             }
             catch (Exception)
             {
