@@ -30,6 +30,9 @@
         <activity
             android:name=".ui.register.RegisterActivity_"
             android:label="@string/register_btn" />
+        <activity
+            android:name=".ui.pin.PinActivity_"
+            android:label="@string/pin" />
     </application>
 
 </manifest>
