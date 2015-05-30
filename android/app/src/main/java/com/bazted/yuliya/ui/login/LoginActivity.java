@@ -29,6 +29,7 @@ import com.bazted.yuliya.R;
 import com.bazted.yuliya.app.BaseActivity;
 import com.bazted.yuliya.app.YApp;
 import com.bazted.yuliya.ui.MainActivity_;
+import com.bazted.yuliya.ui.pin.PinActivity_;
 import com.bazted.yuliya.ui.register.RegisterActivity_;
 
 import org.androidannotations.annotations.AfterViews;
@@ -158,8 +159,8 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
     void startLoginRequest(String login, String pass) {
         //TODO make request
         if (login.equals(LOGIN) && pass.equals(PASS)) {
-            startMainActivity();
             app.auth().login(login, login + pass);
+            startPinConfiguration();
         } else {
             showProgress(false);
         }
@@ -168,6 +169,13 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
     @UiThread
     void startMainActivity() {
         MainActivity_.intent(this)
+                .start();
+        finish();
+    }
+
+    @UiThread
+    void startPinConfiguration() {
+        PinActivity_.intent(this)
                 .start();
         finish();
     }

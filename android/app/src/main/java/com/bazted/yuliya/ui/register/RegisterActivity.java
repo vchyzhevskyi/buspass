@@ -23,8 +23,8 @@ import com.bazted.yuliya.BuildConfig;
 import com.bazted.yuliya.R;
 import com.bazted.yuliya.app.BaseActivity;
 import com.bazted.yuliya.app.YApp;
-import com.bazted.yuliya.ui.MainActivity_;
 import com.bazted.yuliya.ui.login.LoginActivity;
+import com.bazted.yuliya.ui.pin.PinActivity_;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.App;
@@ -154,8 +154,8 @@ public class RegisterActivity extends BaseActivity {
     void startRegistrationRequest(String login, String pass) {
         //TODO make request
         if (login.equals(LoginActivity.LOGIN) && pass.equals(LoginActivity.PASS)) {
-            startMainActivity();
             app.auth().login(login, login + pass);
+            startPinConfiguration();
         } else {
             showProgress(false);
         }
@@ -163,8 +163,8 @@ public class RegisterActivity extends BaseActivity {
     }
 
     @UiThread
-    void startMainActivity() {
-        MainActivity_.intent(this)
+    void startPinConfiguration() {
+        PinActivity_.intent(this)
                 .start();
         finish();
     }
