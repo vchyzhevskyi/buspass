@@ -93,7 +93,7 @@ public class AuthManager {
         emailField().put(null);
         tokenField().put(null);
         pinHashField().put(null);
-        favTicketField().put(null);
+        favTicketField().put(-1);
     }
 
 }
