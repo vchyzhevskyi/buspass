@@ -10,6 +10,7 @@ import com.bazted.yuliya.app.security.Sha1;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.sharedpreferences.Pref;
+import org.androidannotations.api.sharedpreferences.IntPrefField;
 import org.androidannotations.api.sharedpreferences.StringPrefField;
 
 /**
@@ -44,6 +45,14 @@ public class AuthManager {
         return emailField().get();
     }
 
+    private IntPrefField favTicketField() {
+        return authPref.favTicketTypeId();
+    }
+
+    public int favTicketId() {
+        return favTicketField().get();
+    }
+
     private StringPrefField pinHashField() {
         return authPref.pinHash();
     }
@@ -76,6 +85,7 @@ public class AuthManager {
         emailField().put(null);
         tokenField().put(null);
         pinHashField().put(null);
+        favTicketField().put(null);
     }
 
 }

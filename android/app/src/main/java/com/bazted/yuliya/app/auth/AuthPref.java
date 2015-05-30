@@ -21,4 +21,5 @@ public interface AuthPref {
 
     String pinHash();
 
+    int favTicketTypeId();
 }
