@@ -12,9 +12,18 @@ package com.bazted.yuliya.rest.request;
  */
 public class BuyTicketReq {
 
+    public BuyTicketReq(int busNumber, int typeId) {
+        BusNumber = busNumber;
+        Type = new TypeEntity();
+        Type.setId(typeId);
+    }
+
     /**
      * Type : {"Id":1}
      */
+
+    private int BusNumber;
+
     private TypeEntity Type;
 
     public TypeEntity getType() {

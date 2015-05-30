@@ -226,7 +226,7 @@ public class MainActivity extends BaseActivity {
             notificationBuilder
                     .setContentText(" " + busId)
                     .addAction(R.drawable.ic_done_white_24dp,
-                            "Buy", NotificationActivity.getDismissIntent(notificationId, this));
+                            "Buy", NotificationActivity.getBuyIntent(notificationId, busId, this));
         } else {
             notificationBuilder
                     .setContentText("You are buying ticket for a first time. Choose one that suits you. " +
