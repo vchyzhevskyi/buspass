@@ -3,7 +3,7 @@
   -->
 
 <resources>
-    <string name="app_name">Yuliya</string>
+    <string name="app_name">BusPass</string>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="hello_world">Hello world!</string>
