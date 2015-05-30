@@ -17,7 +17,7 @@ import retrofit.client.Header;
 import retrofit.client.Response;
 
 /**
- * Created by T.Bazyshyn on 30/05/15.
+ * ’ * Created by T.Bazyshyn on 30/05/15.
  *
  * @author T.Bazyshyn
  * @since 30/05/15
@@ -46,6 +46,7 @@ public class RestBean {
         this.rest = new RestAdapter.Builder()
                 .setEndpoint(ENDPOINT)
                 .setRequestInterceptor(requestInterceptor)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build().create(YuliyaRest.class);
 
     }
