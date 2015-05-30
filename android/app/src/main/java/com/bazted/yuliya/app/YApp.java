@@ -41,4 +41,8 @@ public class YApp extends Application {
     public YuliyaRest api() {
         return restBean.rest();
     }
+
+    public RestBean getRestBean() {
+        return restBean;
+    }
 }

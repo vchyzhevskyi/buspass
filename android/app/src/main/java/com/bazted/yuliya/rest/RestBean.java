@@ -6,6 +6,8 @@ package com.bazted.yuliya.rest;
 
 import com.bazted.yuliya.app.YApp;
 import com.bazted.yuliya.rest.client.YuliyaRest;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.App;
@@ -15,6 +17,7 @@ import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.client.Header;
 import retrofit.client.Response;
+import retrofit.converter.GsonConverter;
 
 /**
  * ’ * Created by T.Bazyshyn on 30/05/15.
@@ -31,6 +34,7 @@ public class RestBean {
     YApp app;
 
     private YuliyaRest rest;
+    private Gson converter;
 
     @AfterInject
     protected void start() {
@@ -43,8 +47,10 @@ public class RestBean {
             }
         };
 
+        converter = new GsonBuilder().create();
         this.rest = new RestAdapter.Builder()
                 .setEndpoint(ENDPOINT)
+                .setConverter(new GsonConverter(converter))
                 .setRequestInterceptor(requestInterceptor)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build().create(YuliyaRest.class);
@@ -65,5 +71,9 @@ public class RestBean {
             }
         }
         return null;
+    }
+
+    public Gson converter() {
+        return converter;
     }
 }
