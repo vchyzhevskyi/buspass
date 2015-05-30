@@ -16,6 +16,7 @@ alter table dbo.Ticket  drop constraint FKE14EC5364E8AD196
     create table dbo.Ticket (
         Id UNIQUEIDENTIFIER not null,
        Bought DATETIME not null,
+       BusNumber INT not null,
        UserId INT not null,
        TicketTypeId INT not null,
        primary key (Id)

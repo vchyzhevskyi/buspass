@@ -13,6 +13,7 @@ namespace Yuliya.DAL.Mapping
             References(_ => _.User).Column("UserId").Not.Nullable().Cascade.Delete();
             References(_ => _.Type).Column("TicketTypeId").Not.Nullable().Cascade.Delete();
             Map(_ => _.Bought).Column("Bought").Not.Nullable();
+            Map(_ => _.BusNumber).Column("BusNumber").Not.Nullable();
         }
     }
 }

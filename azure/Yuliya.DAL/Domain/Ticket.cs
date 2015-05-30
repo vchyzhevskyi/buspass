@@ -8,5 +8,6 @@ namespace Yuliya.DAL.Domain
         public virtual User User { get; set; }
         public virtual TicketType Type { get; set; }
         public virtual DateTime Bought { get; set; }
+        public virtual int BusNumber { get; set; }
     }
 }
