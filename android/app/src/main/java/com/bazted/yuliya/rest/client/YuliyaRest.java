@@ -27,16 +27,16 @@ public interface YuliyaRest {
     @GET("/User?login={login}&password={password}")
     Response login(@Path("login") String login, @Path("password") String pass);
 
-    @POST("api/User")
+    @POST("/User")
     Response register(@Body RegisterReq registerReq);
 
-    @GET("api/TicketType")
+    @GET("/TicketType")
     List<TicketTypeRes> getListOfTicketTypes();
 
-    @POST("api/Ticket")
+    @POST("/Ticket")
     Response buyTicket(@Body BuyTicketReq buyTicketReq);
 
-    @GET("api/Ticket")
+    @GET("/Ticket")
     List<TicketRes> getTicketHistory();
 
 }
