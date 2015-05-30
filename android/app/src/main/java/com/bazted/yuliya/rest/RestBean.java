@@ -13,6 +13,8 @@ import org.androidannotations.annotations.EBean;
 
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
+import retrofit.client.Header;
+import retrofit.client.Response;
 
 /**
  * Created by T.Bazyshyn on 30/05/15.
@@ -23,6 +25,8 @@ import retrofit.RestAdapter;
 @EBean
 public class RestBean {
 
+    private static final String AUTH_HEADER = "X-APP-Auth";
+    private static final String ENDPOINT = "http://yuliyaweb.azurewebsites.net/api";
     @App
     YApp app;
 
@@ -34,13 +38,13 @@ public class RestBean {
             @Override
             public void intercept(RequestFacade request) {
                 if (app.auth().isLogged()) {
-                    request.addHeader("X-APP-Auth", app.auth().token());
+                    request.addHeader(AUTH_HEADER, app.auth().token());
                 }
             }
         };
 
         this.rest = new RestAdapter.Builder()
-                .setEndpoint("http://yuliyaweb.azurewebsites.net/api")
+                .setEndpoint(ENDPOINT)
                 .setRequestInterceptor(requestInterceptor)
                 .build().create(YuliyaRest.class);
 
@@ -48,5 +52,17 @@ public class RestBean {
 
     public YuliyaRest rest() {
         return rest;
+    }
+
+    public static String getTokenFromHeaders(Response response) {
+        int size = response.getHeaders().size();
+        Header header;
+        for (int i = 0; i < size; i++) {
+            header = response.getHeaders().get(i);
+            if (header.getName().equals(AUTH_HEADER)) {
+                return header.getValue();
+            }
+        }
+        return null;
     }
 }
