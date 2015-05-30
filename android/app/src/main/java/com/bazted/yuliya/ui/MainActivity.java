@@ -25,6 +25,7 @@ import com.bazted.yuliya.app.nfc.BusNfc;
 import com.bazted.yuliya.rest.response.TicketTypeRes;
 import com.bazted.yuliya.ui.login.LoginActivity_;
 import com.bazted.yuliya.ui.tickets.TicketsTypeAdapter;
+import com.bazted.yuliya.ui.tickets.history.TicketHistoryActivity_;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.App;
@@ -106,6 +107,12 @@ public class MainActivity extends BaseActivity {
         app.auth().logout();
         LoginActivity_.intent(this).start();
         finish();
+    }
+
+    @OptionsItem(R.id.action_history)
+    void historyOptionSelected() {
+        TicketHistoryActivity_.intent(this).start();
+
     }
 
     @Override
