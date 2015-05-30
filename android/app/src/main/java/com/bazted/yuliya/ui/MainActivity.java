@@ -12,21 +12,31 @@ import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
-import android.widget.TextView;
+import android.widget.ListView;
 
 import com.bazted.yuliya.R;
 import com.bazted.yuliya.app.BaseActivity;
 import com.bazted.yuliya.app.YApp;
 import com.bazted.yuliya.app.nfc.BusNfc;
+import com.bazted.yuliya.rest.response.TicketTypeRes;
 import com.bazted.yuliya.ui.login.LoginActivity_;
+import com.bazted.yuliya.ui.tickets.TicketsTypeAdapter;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.App;
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+
+import java.util.List;
+
+import retrofit.RetrofitError;
 
 @EActivity(R.layout.activity_main)
 @OptionsMenu({R.menu.menu_main})
@@ -37,15 +47,54 @@ public class MainActivity extends BaseActivity {
     @App
     YApp app;
 
-    @ViewById(R.id.hello_tv)
-    TextView textView;
+    @ViewById(R.id.swipe_refresh_ll)
+    SwipeRefreshLayout swipeRefreshLayout;
+
+    @ViewById(R.id.ticket_lv)
+    ListView ticketList;
+
     private NfcAdapter nfcAdapter;
     private PendingIntent pendingIntent;
     private IntentFilter[] intentFilters;
 
+    @Bean
+    TicketsTypeAdapter adapter;
+
     @AfterViews
     void start() {
-        textView.setText(R.string.app_name);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                downloadTickets();
+            }
+        });
+        ticketList.setAdapter(adapter);
+        if (adapter.getCount() == 0) {
+            downloadTickets();
+        }
+    }
+
+    @Background
+    void downloadTickets() {
+        showRefreshing(true);
+        try {
+            List<TicketTypeRes> listOfTicketTypes = app.api().getListOfTicketTypes();
+            addToAdapter(listOfTicketTypes);
+        } catch (RetrofitError e) {
+            Log.e(LOG, e.toString());
+            showToast("Error Loading");
+        }
+    }
+
+    @UiThread
+    void addToAdapter(List<TicketTypeRes> listOfTicketTypes) {
+        adapter.set(listOfTicketTypes);
+        showRefreshing(false);
+    }
+
+    @UiThread
+    void showRefreshing(boolean show) {
+        swipeRefreshLayout.setRefreshing(show);
     }
 
     @OptionsItem(R.id.action_logout)
