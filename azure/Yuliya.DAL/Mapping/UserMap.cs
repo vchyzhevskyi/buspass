@@ -14,6 +14,7 @@ namespace Yuliya.DAL.Mapping
             Map(_ => _.Login).Column("Login").Not.Nullable().Unique();
             Map(_ => _.Password).Column("Password").CustomType<BinaryBlobType>().Not.Nullable();
             Map(_ => _.Token).Column("Token").Not.Nullable();
+            Map(_ => _.Account).Column("Account").Not.Nullable().Check("Account >= 0");
         }
     }
 }

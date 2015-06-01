@@ -34,6 +34,7 @@ alter table dbo.Ticket  drop constraint FKE14EC5364E8AD196
        Login NVARCHAR(255) not null unique,
        Password VARBINARY(MAX) not null,
        Token UNIQUEIDENTIFIER not null,
+       Account DECIMAL(19,5) not null check( Account >= 0) ,
        primary key (Id)
     )
 

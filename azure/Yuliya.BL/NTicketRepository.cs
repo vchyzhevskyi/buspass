@@ -47,6 +47,7 @@ namespace Yuliya.BL
             using (var dbSession = NSessionFactory.Instance.Create())
             {
                 var criteria = dbSession.CreateCriteria<Ticket>();
+                criteria.SetFetchMode("Type", FetchMode.Eager);
                 criteria.CreateAlias("User", "user");
                 criteria.Add(Restrictions.Eq("user.Token", userToken));
                 var now = DateTime.UtcNow;

@@ -74,9 +74,19 @@ namespace Yuliya.Web.Controllers
             }
         }
 
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] User value)
         {
-            throw new HttpException((int) HttpStatusCode.NotImplemented, string.Empty);
+            Guid token;
+            var authHeader = HttpContext.Current.Request.Headers.Get(AuthHeaderName);
+            if (!string.IsNullOrEmpty(authHeader)
+                && Guid.TryParse(authHeader, out token))
+            {
+                var user = _repo.ReadByToken(token);
+                user.Account = value.Account;
+                _repo.Update(user);
+                return;
+            }
+            throw new HttpException((int) HttpStatusCode.Forbidden, string.Empty);
         }
 
         public void Delete(int id)

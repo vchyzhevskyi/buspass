@@ -45,9 +45,16 @@ namespace Yuliya.Web.Controllers
                 && Guid.TryParse(authHeader, out token)
                 && _userRepo.IsTokenValid(token))
             {
+                var user = _userRepo.ReadByToken(token);
+                var tt = _ttRepo.Read(value.Type.Id);
+                var transactionResult = user.Account - tt.Cost;
+                if (transactionResult < 0m)
+                    throw new HttpException((int) HttpStatusCode.BadRequest, string.Empty);
                 value.Bought = DateTime.UtcNow;
-                value.User = _userRepo.ReadByToken(token);
+                value.User = user;
                 _repo.Create(value);
+                user.Account = transactionResult;
+                _userRepo.Update(user);
                 return;
             }
 
