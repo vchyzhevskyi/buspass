@@ -1,0 +1,35 @@
+<!--
+  ~ Copyright (c) 2015. V. Chyzhevskyi & T.Bazyshyn
+  -->
+
+<resources>
+    <string name="app_name">BusPass</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_done">Done</string>
+
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_confirm_password">Confirm Password</string>
+    <string name="prompt_pin">Provide PIN code</string>
+    <string name="prompt_repeat_pin">Repeat PIN code</string>
+    <string name="pin">PIN</string>
+    <string name="action_sign_in_short">Sign in</string>
+
+    <string name="error_invalid_pin">This PIN is invalid</string>
+    <string name="error_invalid_confirm_pin">PIN does not match</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_confirm_pass">Passwords does not match</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="register_btn">Register</string>
+    <string name="use_nfc_to_buy_ticket">Use NFC to buy ticket. \n Select ticket that suits you.</string>
+    <string name="action_history">History</string>
+</resources>

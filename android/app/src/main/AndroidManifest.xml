@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2015. V. Chyzhevskyi & T.Bazyshyn
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.bazted.yuliya">
+
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="true" />
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.NFC" />
+
+    <application
+        android:name=".app.YApp_"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.login.LoginActivity_"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.MainActivity_"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.tickets.history.TicketHistoryActivity_"
+            android:label="@string/action_history"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.register.RegisterActivity_"
+            android:label="@string/register_btn"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.pin.PinActivity_"
+            android:label="@string/pin"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.NotificationActivity_"
+            android:excludeFromRecents="true"
+            android:taskAffinity="" />
+    </application>
+
+</manifest>
